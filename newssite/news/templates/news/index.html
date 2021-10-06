@@ -1,0 +1,69 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block header %}
+<div class="header">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="header-logo">
+                        <a href="#">
+                            <img src="{% static 'img/logo/logo_events.png' %}" alt="header-logo">
+                        </a>
+                    </div>
+                    <div class="header-title">Агентство маркетинговых коммуникаций</div>
+                    <div class="header-descr">CNews Conferences поможет организовать мероприятия, которые получат максимальный резонанс в бизнес-среде и привлекут к Вам новых партнеров и клиентов.</div>
+                    <div class="header-detail">
+                        <a href="#">подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="menu">
+            <div class="container">
+                <ul class="menu-wrapper">
+                    <li>
+                        <a href="#">
+                            <img src="{% static 'img/logo/logo-event.png' %}" alt="logo">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">О компании</a>
+                    </li>
+                    <li>
+                        <a href="#">Ближайшие мероприятия</a>
+                    </li>
+                    <li>
+                        <a href="#">Материалы</a>
+                    </li>
+                    <li>
+                        <a href="#">Архив мероприятий</a>
+                    </li>
+                    <li>
+                        <a href="#">КОНТАКТЫ</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+{% endblock %}
+
+{% block content %}
+    <section class="news">
+        <div class="container">
+            <div class="news-content">
+                {% for new in news %}
+                    <div class="news-item">
+                        <a href="{% url 'news:new_detail' new.id %}">
+                            <div class="news-item_img">
+                                <img src="/media/{{ new.image }}" alt="img">
+                            </div>
+                            <div class="news-item_header">{{ new.header }}</div>
+                            <div class="news-item_category"> {{ new.category }}</div>
+                            <div class="news-item_descr">{{ new.short_descr }}</div>
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+{% endblock%}

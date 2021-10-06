@@ -1,0 +1,30 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+    <div class="detail-new">
+        <div class="container">
+            <div class="detail-new_img">
+                <img src=" /media/{{ new.image }}" alt="img">
+            </div>
+            <div class="detail-new_header">{{ new.header }}</div>
+            <div class="detail-new_category">{{ new.category }}</div>
+            <div class="detail-new_descr">{{ new.description }}</div>
+            <h2 class="author-title">Авторы новости</h2>
+            <div class="author-content">
+                {% for author in new.author.all %}
+                    <div class="author-list">
+                         <div class="author-img">
+                            <img src="/media/{{ author.image }}" alt="img">
+                        </div>
+                        <div class="author_name">{{ author.first_name }} {{ author.last_name }}</div>
+                        <div class="author-short_descr">{{ author.short_descr }}</div>
+                        <div class="author-last_description">{{ author.description }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% block pagination %}{% endblock %}
+{% endblock %}
+
+

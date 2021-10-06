@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title|title }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <header>
+        <div class="top">
+            <div class="container">
+                <div class="top-wrapper">
+                    <div class="top-left">
+                        <a href="{% url 'index' %}" class="top-logo">
+                            <img src="{% static 'img/logo/logo-cnews.png' %}" alt="logo">
+                        </a>
+                        <div class="top-menu">
+                            <ul class="top-menu_items">
+                                <li>
+                                    <a href="{% url 'news:index' %}">Новости</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'author' %}">Аналитика</a>
+                                </li>
+                                <li>
+                                    <a href="#">Конференции</a>
+                                </li>
+                                <li>
+                                    <a href="#">Маркет</a>
+                                </li>
+                                <li>
+                                    <a href="#">Техника</a>
+                                </li>
+                                <li>
+                                    <a href="#">ТВ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="top-right">
+                        <a href="#">Вход |</a>
+                        <a href="#"> Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block header %}{% endblock %}
+    </header>
+
+    {% block content %}{% endblock %}
+    {% block pagination %}
+        <div class="pagination">
+            <ul class="pagination-list justify-content-center">
+                <li class="page-item {% if not news.has_previous %} disabled  {% endif %}">
+                    <a class="page-link" href="{% if news.has_previous %} {% url 'news:page' news.previous_page_number %} {% else %} # {% endif %}">Previous</a>
+                </li>
+                {% for page in news.paginator.page_range %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'news:page' page %}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+                <li class="page-item {% if not news.has_next %} disabled  {% endif %}">
+                    <a class="page-link" href="{% if news.has_next %} {% url 'news:page' news.next_page_number %} {% else %} # {% endif %}">Next</a>
+                </li>
+            </ul>
+        </div>
+        {% endblock %}
+
+ <footer class="footer">
+        <div class="container">
+            <div class="footer-wrapper">
+                <div class="copy">
+                    Все права защищены © 1995 - 2021 CNews
+                </div>
+                <div class="footer-cnews">
+                    <a href="#">CNews</a>
+                </div>
+                <ul class="footer-menu">
+                    <li>
+                        <a href="#">Новости</a>
+                    </li>
+                    <li>
+                        <a href="#">Аналитика</a>
+                    </li>
+                    <li>
+                        <a href="#">Маркет</a>
+                    </li>
+                    <li>
+                        <a href="#">ТВ</a>
+                    </li>
+                    <li>
+                        <a href="#">Блоги</a>
+                    </li>
+                    <li>
+                        <a href="#">Техника</a>
+                    </li>
+                    <li>
+                        <a href="#">Наука</a>
+                    </li>
+                    <li>
+                        <a href="#">Софт</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

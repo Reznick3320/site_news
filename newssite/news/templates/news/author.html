@@ -1,0 +1,9 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+    <p>Для теста</p>
+    {% for author in authors %}
+        <div> {{ author.first_name }}</div>
+        <div> <img src="/media/{{ author.image }}"></div>
+    {% endfor %}
+{% endblock %}
